@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
+    "koa": "^2.7.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-mongoose": "^2.0.0",
+    "koa-router": "^7.4.0",
+    "mongoose": "^5.4.20"
+  }
+}
