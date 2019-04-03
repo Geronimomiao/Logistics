@@ -58,3 +58,5 @@ const dataSchema = new Schema({
     default: Date.now()
   },
 })
+
+module.exports = mongoose.model('Data', dataSchema)

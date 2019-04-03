@@ -1,16 +1,26 @@
 // 注意require('koa-router')返回的是函数:
-const Router = require('koa-router')();
+
+const router = require('koa-router')();
+const mongoose = require('mongoose')
+mongoose.connect('mongodb://127.0.0.1:27017/data')
+mongoose.connection.on("connected", function () {
+  console.log("MongoDB Connected success")
+})
+mongoose.connection.on("error", function () {
+  console.log("MongoDB Connected fail")
+})
+mongoose.connection.on("disconnected", function () {
+  console.log("MongoDB Connected disconnected")
+})
+
 // add url-route:
-Router.get('/hello/:name', async (ctx, next) => {
-  let name = ctx.params.name;
-  ctx.response.body = `<h1>Hello, ${name}!</h1>`;
+router.get('/', async (ctx, next) => {
+  ctx.render('index.html', {
+    title: 'Welcome'
+  });
 });
 
-Router.get('/', async (ctx, next) => {
-  ctx.response.body = '<h1>Index</h1>';
-});
-
-Router.post('/signin', async (ctx, next) => {
+router.post('/signin', async (ctx, next) => {
   let
     name = ctx.request.body.name || '',
     password = ctx.request.body.password || '';
@@ -23,4 +33,6 @@ Router.post('/signin', async (ctx, next) => {
   }
 });
 
-module.exports = Router;
+
+
+module.exports = router;
