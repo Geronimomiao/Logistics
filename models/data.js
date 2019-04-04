@@ -52,6 +52,7 @@ const dataSchema = new Schema({
 
   other_info: String, // 情况说明
 
+  path: String,
   password: {'type':String,'default':'123456'},  // 默认密码
   createdtime:  {
     type: Date,

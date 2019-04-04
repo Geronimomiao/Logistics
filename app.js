@@ -3,10 +3,12 @@ const bodyParser = require('koa-bodyparser');
 const router = require('./router/router');
 const upload = require('./router/upload');
 const koaBody = require('koa-body');
+const cors = require('koa2-cors');
 
 const app = new Koa();
 
-
+//允许跨域
+app.use(cors());
 // add router middleware:
 app.use(koaBody({
   multipart: true,

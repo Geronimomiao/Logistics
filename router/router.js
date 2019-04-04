@@ -13,11 +13,14 @@ mongoose.connection.on("disconnected", function () {
   console.log("MongoDB Connected disconnected")
 })
 
+
 // add url-route:
-router.get('/', async (ctx, next) => {
-  ctx.render('index.html', {
-    title: 'Welcome'
-  });
+router.post('/', async (ctx, next) => {
+  let test = {
+    status: 1,
+    msg: ''
+  }
+  ctx.body = JSON.stringify(test);
 });
 
 router.post('/signin', async (ctx, next) => {
