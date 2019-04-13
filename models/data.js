@@ -10,8 +10,14 @@ const dataSchema = new Schema({
   box_type: String,    // 箱型量
   carrier: String,     // 承运人
   boat_name: String,   // 船名/航次
-  order_id: String,    // 提单号
-  box_num: String,     // 箱号
+  order_id: {
+    type: String,
+    default: 'null'
+  },    // 提单号
+  box_num: {
+    type: String,
+    default: 'null'
+  },     // 箱号
   seal_num: String,    // 封号
   box_weight: String,  // 皮箱重量
   destination: String, // 目的港

@@ -1,9 +1,11 @@
 const Koa = require('koa');
 const bodyParser = require('koa-bodyparser');
-const router = require('./router/router');
-const upload = require('./router/upload');
 const koaBody = require('koa-body');
 const cors = require('koa2-cors');
+
+const data = require('./router/data');
+const upload = require('./router/upload');
+const user = require('./router/user');
 
 const app = new Koa();
 
@@ -18,7 +20,8 @@ app.use(koaBody({
 }));
 app.use(bodyParser());
 app.use(upload.routes());
-app.use(router.routes());
+app.use(data.routes());
+app.use(user.routes());
 
-app.listen(3000);
-console.log('app started at port 3000...');
+
+app.listen(3100);
