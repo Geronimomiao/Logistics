@@ -1,28 +1,14 @@
 const router = require('koa-router')();
 const Driver = require('../models/driver');
 
-router.post('/driver/register', async (ctx, next) => {
-  console.log(111)
-  let username = ctx.request.body.username;
-  let phone = ctx.request.body.phone;
-  let password = ctx.request.body.password;
-  let driver = new Driver({
-    username: username,
-    phone: phone,
-    password: password
-  });
-  driver.save()
-  ctx.body = JSON.stringify(driver);
-})
 
-router.post('/driver/login', async (ctx, next) => {
-  let phone = ctx.request.body.phone;
-  let password = ctx.request.body.password;
-  let driver = await Driver.findOne({phone: phone, password: password});
+router.post('/driver/info', async (ctx, next) => {
+  let list_id = ctx.request.body.list_id;
+  let driver = await Driver.findOne({list_id: list_id});
   if (driver) {
     let data = {
       status: 1,
-      msg: user,
+      msg: driver,
     }
     ctx.body = JSON.stringify(data);
   } else {

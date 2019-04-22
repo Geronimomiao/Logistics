@@ -1,10 +1,10 @@
 const router = require('koa-router')();
-const Data = require('../models/data')
+const User = require('../models/user')
 
 router.post('/user/login', async (ctx, next) => {
-  let contact = ctx.request.body.username;
+  let name = ctx.request.body.username;
   let password = ctx.request.body.password;
-  let user = await Data.findOne({contact: contact, password: password});
+  let user = await User.findOne({name: name, password: password});
   if (user) {
     let data = {
       status: 1,

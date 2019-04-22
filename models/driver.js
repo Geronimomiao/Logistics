@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const driverSchema = new Schema({
+  list_id: String,    // 序号
   username: String,   // 姓名
   car_num: String,    // 车号
   order_id: {

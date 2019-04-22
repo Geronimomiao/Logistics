@@ -10,7 +10,10 @@ router.post('/upload',
   // 保存用户上传文件
   async (ctx, next) => {
     // 删除之前数据
-    const rm = await Data.remove({})
+    const rmData = await Data.remove({})
+
+    // 删除之前数据
+    const rmDriver = await Driver.remove({})
 
     // 上传单个文件
     const file = ctx.request.files.file; // 获取上传文件
@@ -32,7 +35,8 @@ router.post('/upload',
     let data = {
       status: 1,
       msg: '上传成功',
-      rm,
+      rmData,
+      rmDriver
     }
     ctx.body = JSON.stringify(data);
   },
@@ -99,13 +103,16 @@ router.post('/upload',
       data.save()
     }
 
-    for (let i = 2; i < pre_datas.length - 1; i++) {
 
+
+    for (let i = 2; i < pre_datas.length - 1; i++) {
+      // 保存司机信息
       let driver = new Driver({
+        list_id: pre_datas[i][0],    // 序号
         username: pre_datas[i][7],   // 姓名
         car_num: pre_datas[i][20],    // 车号
         order_id: pre_datas[i][10],        // 提单号
-        box_num: pre_datas[i][11],         // 箱号
+        // box_num: pre_datas[i][11],         // 箱号
         boat_name: pre_datas[i][8],        // 船名/航次
         car_phone: pre_datas[i][21],       // 司机电话
         destination: pre_datas[i][14],     // 目的港

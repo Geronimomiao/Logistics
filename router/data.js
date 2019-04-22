@@ -17,7 +17,13 @@ mongoose.connection.on("disconnected", function () {
 
 // 展示所有 数据
 router.post('/show/data', async (ctx, next) => {
-  let data = await Data.find();
+  let contact = ctx.request.body.contact;
+  let data = await Data.aggregate([
+    {$match:{contact: contact}},
+    { $group:{  _id: "$order_id", date: {$push: "$date"}, status: {$push: "$status"} } }
+  ]);
+
+  // let data = await Data.find({contact: contact});
   let res = {
     status: 1,
     msg: data,
