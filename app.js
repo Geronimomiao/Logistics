@@ -8,6 +8,7 @@ const data = require('./router/data');
 const upload = require('./router/upload');
 const user = require('./router/user');
 const driver = require('./router/driver');
+const admin = require('./router/admin');
 
 const app = new Koa();
 
@@ -17,6 +18,7 @@ router
   .use('/v1', upload.routes())
   .use('/v1', user.routes())
   .use('/v1', driver.routes())
+  .use('/v1', admin.routes())
 
 // 允许跨域
 app.use(cors());

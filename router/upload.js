@@ -5,6 +5,7 @@ const path = require('path');
 const Data = require('../models/data')
 const Driver = require('../models/driver')
 const User = require('../models/user')
+const qiniu = require('../service/qiniu')
 
 router.post('/upload',
   // 保存用户上传文件
@@ -112,7 +113,7 @@ router.post('/upload',
         username: pre_datas[i][7],   // 姓名
         car_num: pre_datas[i][20],    // 车号
         order_id: pre_datas[i][10],        // 提单号
-        // box_num: pre_datas[i][11],         // 箱号
+        box_num: pre_datas[i][11],         // 箱号
         boat_name: pre_datas[i][8],        // 船名/航次
         car_phone: pre_datas[i][21],       // 司机电话
         destination: pre_datas[i][14],     // 目的港
@@ -180,5 +181,17 @@ router.post('/upload/user',
 
   }
 );
+
+router.post('/getToken', (ctx, next) => {
+  let key = ctx.request.body.key
+  // console.log(key)
+  let token = qiniu.uptoken(key)
+  let data = {
+    status: 1,
+    msg: '上传成功',
+    result: token
+  }
+  ctx.body = JSON.stringify(data);
+});
 
 module.exports = router;

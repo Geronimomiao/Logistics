@@ -17,7 +17,8 @@ const driverSchema = new Schema({
   car_phone: String,  // 司机电话
   destination: String, // 目的港
   location_detail: String, // 详细装货地点
-  position: {}        // 司机位置
+  position: {},        // 司机位置
+  pic: ''              // 司机到达位置后 拍摄照片
 })
 
 module.exports = mongoose.model('Driver', driverSchema)

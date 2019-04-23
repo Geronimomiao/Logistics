@@ -15,7 +15,7 @@ mongoose.connection.on("disconnected", function () {
   console.log("MongoDB Connected disconnected")
 })
 
-// 展示所有 数据
+// 展示指定用户 数据
 router.post('/show/data', async (ctx, next) => {
   let contact = ctx.request.body.contact;
   let data = await Data.aggregate([
