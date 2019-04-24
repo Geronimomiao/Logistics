@@ -64,4 +64,12 @@ router.post('/show/del', async (ctx, next) => {
   ctx.body = JSON.stringify(res);
 })
 
+// 修改提单状态
+router.post('/show/update/status', async (ctx, next) => {
+  let list_id = ctx.request.body.list_id;
+  let status = ctx.request.body.status;
+  let data = await Data.updateOne({list_id: list_id}, {'$set': {status: status}})
+  ctx.body = JSON.stringify(data);
+})
+
 module.exports = router;

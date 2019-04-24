@@ -34,10 +34,17 @@ router.post('/driver/getPosition', async (ctx, next) => {
   ctx.body = JSON.stringify(driver);
 })
 
-router.post('/driver/setPic', async (ctx, next) => {
+router.post('/driver/setSealPic', async (ctx, next) => {
   let list_id = ctx.request.body.list_id;
   let pic = ctx.request.body.pic;
-  let driver = await Driver.updateOne({list_id: list_id}, {'$set': {pic: pic}})
+  let driver = await Driver.updateOne({list_id: list_id}, {'$set': {pic_seal: pic}})
+  ctx.body = JSON.stringify(driver);
+})
+
+router.post('/driver/setBoxPic', async (ctx, next) => {
+  let list_id = ctx.request.body.list_id;
+  let pic = ctx.request.body.pic;
+  let driver = await Driver.updateOne({list_id: list_id}, {'$set': {pic_box_num: pic}})
   ctx.body = JSON.stringify(driver);
 })
 
