@@ -48,7 +48,7 @@ router.post('/upload',
     const workbook = xlsx.parse(filePath);
     const pre_datas = workbook[0].data  // 处理前的数据
 
-    for (let i = 2; i < pre_datas.length - 1; i++) {
+    for (let i = 2; i < pre_datas.length; i++) {
       let data = new Data({
         list_id: pre_datas[i][0],
         date: new Date(1900, 0, pre_datas[i][1] - 1).toLocaleString(),
@@ -106,7 +106,7 @@ router.post('/upload',
 
 
 
-    for (let i = 2; i < pre_datas.length - 1; i++) {
+    for (let i = 2; i < pre_datas.length ; i++) {
       // 保存司机信息
       let driver = new Driver({
         list_id: pre_datas[i][0],    // 序号
@@ -162,9 +162,11 @@ router.post('/upload/data',
     const filePath = ctx.state.filePath;
     const workbook = xlsx.parse(filePath);
     const pre_datas = workbook[0].data  // 处理前的数据
-
-    for (let i = 2; i < pre_datas.length - 1; i++) {
-      await Data.updateOne({list_id: pre_datas[i][0]}, {'$set':
+    console.log(pre_datas[2][0])
+    console.log(pre_datas.length-1)
+    for (let i = 2; i < pre_datas.length; i++) {
+      console.log(pre_datas[i][0])
+      let data = await Data.updateOne({list_id: pre_datas[i][0]}, {'$set':
           {
             date: new Date(1900, 0, pre_datas[i][1] - 1).toLocaleString(),
             principal: pre_datas[i][2],   // 委托人
@@ -217,11 +219,12 @@ router.post('/upload/data',
             other_info: pre_datas[i][40], // 情况说明
           }
       })
+      console.log(data)
     }
 
 
 
-    for (let i = 2; i < pre_datas.length - 1; i++) {
+    for (let i = 2; i < pre_datas.length; i++) {
       // 保存司机信息
       await Driver.updateOne({list_id: pre_datas[i][0]}, {'$set':
           {
@@ -232,8 +235,6 @@ router.post('/upload/data',
             boat_name: pre_datas[i][8],        // 船名/航次
             car_phone: pre_datas[i][21],       // 司机电话
             destination: pre_datas[i][14],     // 目的港
-            location_detail: pre_datas[i][5],  // 详细装货地点
-            position: {}        // 司机位置
           }
       })
     }
