@@ -162,8 +162,8 @@ router.post('/upload/data',
     const filePath = ctx.state.filePath;
     const workbook = xlsx.parse(filePath);
     const pre_datas = workbook[0].data  // 处理前的数据
-    console.log(pre_datas[2][0])
-    console.log(pre_datas.length-1)
+    // console.log(pre_datas[2][0])
+    // console.log(pre_datas.length-1)
     for (let i = 2; i < pre_datas.length; i++) {
       console.log(pre_datas[i][0])
       let data = await Data.updateOne({list_id: pre_datas[i][0]}, {'$set':
@@ -283,7 +283,7 @@ router.post('/upload/user',
     const workbook = xlsx.parse(filePath);
     const pre_datas = workbook[0].data  // 处理前的数据
     console.log(pre_datas)
-    for (let i = 1; i < pre_datas.length - 1; i++) {
+    for (let i = 1; i < pre_datas.length; i++) {
       console.log(pre_datas[i][0])
       let user = new User({
         name: pre_datas[i][0],
