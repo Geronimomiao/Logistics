@@ -9,7 +9,7 @@
     "koa-router": "^7.4.0",
     "koa2-cors": "^2.0.6",
     "mime": "^2.4.0",
-    "mongoose": "^5.4.20",
+    "mongoose": "^5.7.5",
     "mz": "^2.7.0",
     "node-xlsx": "^0.14.1",
     "nunjucks": "^3.2.0",
